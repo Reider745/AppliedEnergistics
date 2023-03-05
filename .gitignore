@@ -1,0 +1,14 @@
+.vscode/.ropeproject
+toolchain/build
+toolchain/temp
+toolchain/ndk
+output
+.idea
+.settings
+**/__pycache__
+**/tsconfig.json
+
+*.log
+*.icmod
+toolchain
+.vscode

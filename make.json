@@ -1,0 +1,65 @@
+{
+    "global": {
+        "info": {
+            "name": "AppliedEnergistics 2",
+            "author": "Reider ___",
+            "version": "pre-alpha 0.1(preview 2)",
+            "description": "",
+            "icon": "src/mod_icon.png"
+        },
+        "api": "CoreEngine"
+    },
+    "make": {
+        "debugAbi": "armeabi-v7a",
+        "abis": [
+            "armeabi-v7a"
+        ],
+        "linkNative": [
+            "minecraftpe",
+            "innercore",
+            "nativejs"
+        ],
+        "excludeFromRelease": [],
+        "pushTo": "storage/emulated/0/games/horizon/packs/innercore-test-b113-performance-beta-v2/modpacks/YouTube/mods/AppliedEnergistics",
+        "ndkPath": null
+    },
+    "resources": [
+        {
+			"path": "src/assets",
+			"type": "resource_directory"
+		},
+        {
+			"path": "src/assets/gui",
+			"type": "gui"
+		}
+    ],
+    "sources": [
+        {
+            "source": "src/dev",
+            "target": "main.js",
+            "type": "main",
+            "language": "typescript"
+        },
+        {
+            "source": "src/launcher.js",
+            "type": "launcher",
+            "language": "javascript"
+        },
+        {
+            "source": "src/lib/*",
+            "type": "library",
+            "language": "javascript"
+        }
+    ],
+    "compile": [],
+    "additional": [
+        {
+            "source": "src/facede.json",
+            "targetDir": "."
+        },
+        {
+            "source": "src/config.json",
+            "targetDir": "."
+        }
+    ]
+}

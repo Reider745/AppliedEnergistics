@@ -1,0 +1,22 @@
+[
+    {"id":"VanillaBlockID.stone","datas":[0, 1, 2, 3, 4, 5, 6]},
+    {"id":"VanillaBlockID.stonebrick"},
+    {"id":"VanillaBlockID.brick_block"},
+    {"id":"VanillaBlockID.dirt"},
+    {"id":"VanillaBlockID.grass"},
+    {"id":"VanillaBlockID.glass"},
+
+    {"id":"VanillaBlockID.diamond_block"},
+    {"id":"VanillaBlockID.diamond_ore"},
+
+    {"id":"VanillaBlockID.gold_block"},
+    {"id":"VanillaBlockID.gold_ore"},
+
+    {"id":"VanillaBlockID.iron_block"},
+    {"id":"VanillaBlockID.iron_ore"},
+
+    {"id":"VanillaBlockID.coal_block"},
+    {"id":"VanillaBlockID.coal_ore"},
+
+    {"id":"VanillaBlockID.planks","datas":[0, 1, 2, 3, 4, 5]}
+]
