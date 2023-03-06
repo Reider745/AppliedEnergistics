@@ -1,14 +1,24 @@
 namespace MachineRegisty {
     export interface RecipeData {
         input: ItemInstance[],
-        output: ItemInstance[]
+        output: ItemInstance[],
+        info: any
+    }
+
+    let groups: {[key: string]: RecipePool} = {}; 
+    function getRecipePoolByName(nmae: string): Nullable<RecipePool> {
+        return groups[nmae];
     }
 
     export class RecipePool {
         protected recipes: RecipeData[] = [];
 
-        public add(input: ItemInstance[], output: ItemInstance[]): RecipePool {
-            this.recipes.push({input, output});
+        constructor(name: string){
+            groups[name] = this;
+        }
+
+        public add(input: ItemInstance[], output: ItemInstance[], info?: any): RecipePool {
+            this.recipes.push({input, output, info});
             return this;
         }
 
@@ -78,8 +88,13 @@ class Machine extends TileEntityBase {
         return null;
     }
 
+    public canOutput(): boolean {
+        return true;
+    }
+
     private checkRecipe(input: ItemInstance[], output: ItemInstance[]): Nullable<MachineRegisty.RecipeData> {
         let result = this.getResult(input);
+        if(!this.canOutput()) return result;
         if(result){
             for(let i in output){
                 let item1 = output[i];
@@ -88,7 +103,7 @@ class Machine extends TileEntityBase {
             }
             return result;
         }
-        return null;
+        return result;
     }
 
     public getItems(slots: string[]): ItemInstance[] {
@@ -125,12 +140,22 @@ class Machine extends TileEntityBase {
                 this.data.progress = 0;
                 
                 this.container.validateAll();
+                this.onRecipe();
             }
             this.container.setScale("progress", this.getProgress()/this.getProgressMax());
             this.data.progress++;
+            this.onTickRecipe(result);
         }
         
         this.container.sendChanges();
+    }
+
+    public onTickRecipe(result: MachineRegisty.RecipeData): void {
+
+    }
+
+    public onRecipe(): void {
+
     }
 
     public getScreenName(player: number, coords: Callback.ItemUseCoordinates): string {

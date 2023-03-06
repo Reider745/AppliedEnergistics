@@ -9,4 +9,4 @@ let Charged = (function(obj, texture_default, data_default){
 	model.addBoxByBlock("cube_4", 0.1875, 0.1875, 0.75, 0.8125, 0.8125, 0.8125, obj["cube_4"] ? obj["cube_4"].texture : texture, obj["cube_4"] ? obj["cube_4"].data : data);
 	model.addBoxByBlock("cube_5", 0.375, 0.875, 0.0625, 0.625, 1, 0.9375, obj["cube_5"] ? obj["cube_5"].texture : texture, obj["cube_5"] ? obj["cube_5"].data : data);
 	return model;
-})();//boxes - 5
+})(null, [["charger_inside", 0], ["charger", 0], ["charger_side", 0]]);//boxes - 5

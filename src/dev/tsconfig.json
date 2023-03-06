@@ -1,0 +1,51 @@
+{
+	"compilerOptions": {
+		"target": "ES5",
+		"lib": [
+			"ESNext"
+		],
+		"outFile": "C:\\vs\\AppliedEnergistics\\toolchain\\build\\project\\sources\\main.js",
+		"experimentalDecorators": true,
+		"downlevelIteration": true,
+		"allowJs": true
+	},
+	"exclude": [
+		"**/node_modules/*",
+		"dom",
+		"webpack"
+	],
+	"include": [
+		"header.ts",
+		"models/Carver.js",
+		"models/ExportBus.js",
+		"models/ImportBus.js",
+		"models/Charged.js",
+		"api/BlockModel.ts",
+		"api/AppliedEnergistics.ts",
+		"api/SubTile.ts",
+		"api/MachineRegistry.ts",
+		"material/ore.ts",
+		"blocks/SpecialType.ts",
+		"blocks/other.js",
+		"blocks/Controller.ts",
+		"blocks/energy_acceptor.ts",
+		"blocks/energy_cell.ts",
+		"blocks/drive.ts",
+		"blocks/facede.ts",
+		"blocks/display.ts",
+		"blocks/bus.ts",
+		"blocks/machine/Charged.ts",
+		"items/storage.ts",
+		"shared.ts"
+	],
+	"files": [
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\android-declarations.d.ts",
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\android.d.ts",
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\BlockEngine.d.ts",
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\core-engine.d.ts",
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\energy-net.d.ts",
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\ParticlesCore.d.ts",
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\RenderUtil.d.ts",
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\StorageInterface.d.ts"
+	]
+}

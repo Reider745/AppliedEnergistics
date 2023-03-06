@@ -3,6 +3,7 @@ IMPORT("EnergyNet");
 IMPORT("TextureWorker");
 IMPORT("StorageInterface");
 IMPORT("BlockEngine");
+IMPORT("ParticlesCore");
 
 const EMPTY_ITEM:ItemInstance = {id: 0, count: 0, data: 0};
 
