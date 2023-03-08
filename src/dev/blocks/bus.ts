@@ -167,8 +167,7 @@ class BusImportSubTile extends BusSubTile {
 		let slots = storage.getOutputSlots(World.getInverseBlockSide(this.side));
 		for(let i in slots){
 			let slot = slots[i];
-			let item = storage.getSlot(slot);
-			item = {id: item.id, count: item.count, data: item.data, extra: item.extra};
+			let item = new ItemStack(storage.getSlot(slot));
 			if(item.id != 0 && this.isTransferItem(item)){
 				let items = this.tile.controller.getItems();
 				let count = this.getTransferCount();

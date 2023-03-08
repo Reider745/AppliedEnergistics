@@ -10,7 +10,7 @@
 */
 LIBRARY({
 	name: "RenderUtil",
-	version: 7,
+	version: 8,
 	shared: true,
 	api: "CoreEngine"
 });
@@ -231,12 +231,15 @@ let RenderAPI = {
 	getGroup(name){
 		return this.models[name];
 	},
-	TileEntityClient(prot){
+	TileEntityClient(prot, def_group, def_model){
 		for(let key in prot)
 			this[key] = prot[key];
 		
 		this.uptModel = function(){
-			const model = RenderAPI.getGroup(String(this.networkData.getString("group"))).get(String(this.networkData.getString("name"))).copy();
+			let group = RenderAPI.getGroup(String(this.networkData.getString("group", def_group||null)));
+			if(!group) return;
+			const model = group.get(String(this.networkData.getString("name", def_model||null))).copy();
+			if(!model) return;
 			if(prot.buildModel) prot.buildModel.call(this, model);
 			BlockRenderer.mapAtCoords(this.x, this.y, this.z, model.getICRenderModel());
 			BlockRenderer.mapCollisionAndRaycastModelAtCoords(this.dimension, this.x, this.y, this.z, model.getCollisionShape());

@@ -56,17 +56,60 @@ namespace MachineRegisty {
     }
 }
 
-class Machine extends TileEntityBase {
-    constructor(id: number){
-        super();-
+class Machine extends TileEntityBase implements EnergyTile {
+    public energy: EnergyType;
+
+    constructor(id: number, energy?: EnergyType){
+        super();
         StorageInterface.createInterface(id, {
             getInputSlots: this.getInputSlots,
             getOutputSlots: this.getOuputSlots
         });
         TileEntity.registerPrototype(id, this);
+        if(energy){
+            this.energy = energy;
+            EnergyTileRegistry.addEnergyTypeForId(id, Ae);
+            addConnect(id);
+        }
     }
 
-    defaultValues: {progress: 0};
+    public energyTick(type: string, node: EnergyTileNode): void {
+        
+    }
+    public energyReceive(type: string, amount: number, voltage: number): number {
+        this.data.energy = this.data.energy || 0;
+        let energy = Math.min(this.getEnergyCapacity(), this.data.energy + Math.min(amount, this.getEnergyReceve()));
+        let receive = energy - this.data.energy;
+        this.data.energy = energy;
+        return receive;
+    }
+    public isConductor(type: string): boolean {
+        return true;
+    }
+    public canReceiveEnergy(side: number, type: string): boolean {
+        return true;
+    }
+    public canExtractEnergy(side: number, type: string): boolean {
+        return false;
+    }
+
+    public getEnergyReceve(): number {
+        return 32;
+    }
+
+    public getEnergyСonsumption(): number {
+        return 1;
+    }
+
+    public getEnergy(): number {
+        return this.data.energy;
+    }
+
+    public getEnergyCapacity(): number {
+        return 1000;
+    }
+
+    defaultValues: {progress: 0, energy: 0};
 
     public getProgress(): number {
         return this.data.progress;
@@ -124,11 +167,18 @@ class Machine extends TileEntityBase {
 
     public onTick(): void {
         StorageInterface.checkHoppers(this);
+        this.container.setScale("energy", this.data.energy/this.getEnergyCapacity());
 
         let input = this.getItems(this.getInputSlots());
         let output = this.getItems(this.getOuputSlots());
 
         let result = this.checkRecipe(input, output);
+
+        if(this.energy && this.getEnergy() <= 0){
+            this.data.progress = Math.max(0, this.data.progress-1);
+            this.container.sendChanges();
+            return;
+        }
 
         if(result){
             if(this.getProgress() >= this.getProgressMax()){
@@ -144,6 +194,7 @@ class Machine extends TileEntityBase {
             }
             this.container.setScale("progress", this.getProgress()/this.getProgressMax());
             this.data.progress++;
+            this.data.energy -= this.getEnergyСonsumption();
             this.onTickRecipe(result);
         }
         

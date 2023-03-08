@@ -78,7 +78,7 @@ class ChargedBlock extends BlockRotative {
         for(let i = 2;i < 6;i++)
             model.rotate(i).setBlockModel(this.id, i);
         model.rotate(3).setBlockModel(this.id, 0);
-        new ChargedTile(this.id);
+        new ChargedTile(this.id, Ae);
     }
 
     getDrop(coords: Vector, block: Tile, level: number, enchant: ToolAPI.EnchantData, item: ItemStack, region: BlockSource): ItemInstanceArray[] {
