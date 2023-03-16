@@ -68,6 +68,7 @@ namespace EntityAI {
                 let _ai = new list_ai[i](entity, LIST.length);
                 if(!_ai.canCreate())
                     return;
+                _ai.create();
                 if(_ai.canTick())
                     Updatable.addUpdatable({
                         update() {
@@ -76,7 +77,6 @@ namespace EntityAI {
                         }
                     });
                 LIST.push(_ai);
-                _ai.canCreate();
             }
         }
     }
@@ -126,16 +126,4 @@ Callback.addCallback("EntityRemoved", (ent) => {
     EntityAI.remove(EntityAI.getAiByEntity(ent));
 });
 
-class TestAI extends EntityAI.AI {
-    public canCreate(): boolean {
-        return Entity.getDroppedItem(this.entity).id == 264;
-    }
-
-    public tick(): void {
-        let item = Entity.getDroppedItem(this.entity);
-        Entity.setDroppedItem(this.entity, 263, item.count, 0);
-        this.destroy();
-    }
-}
-
-EntityAI.register("minecraft:item<>", TestAI);
+class AI extends EntityAI.AI {};

@@ -1,0 +1,10 @@
+{
+    "shared": {
+        "name": "applied_energistics",
+		"include": []
+    },
+
+    "depends": [
+    	"innercore"
+	]
+}

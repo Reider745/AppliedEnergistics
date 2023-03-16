@@ -51,7 +51,16 @@
             "language": "javascript"
         }
     ],
-    "compile": [],
+    "compile": [
+        {
+            "source": "src/native",
+            "type": "native"
+        },
+        {
+            "source": "src/java",
+            "type":"java"
+        }
+    ],
     "additional": [
         {
             "source": "src/facede.json",

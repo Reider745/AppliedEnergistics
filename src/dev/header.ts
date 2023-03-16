@@ -7,6 +7,12 @@ IMPORT("ParticlesCore");
 
 const EMPTY_ITEM:ItemInstance = {id: 0, count: 0, data: 0};
 
+interface IItem {
+	setShouldDespawn(id: number, value: boolean): void;
+}
+
+let JavaItem: IItem = WRAP_JAVA("com.reider745.appliedenergistics.Item");
+
 
 const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);
 const Ae = EnergyTypeRegistry.assureEnergyType("Ae", 1);
