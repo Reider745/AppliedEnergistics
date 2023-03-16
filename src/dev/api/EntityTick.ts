@@ -125,5 +125,3 @@ Callback.addCallback("EntityAdded", (ent) => {
 Callback.addCallback("EntityRemoved", (ent) => {
     EntityAI.remove(EntityAI.getAiByEntity(ent));
 });
-
-class AI extends EntityAI.AI {};

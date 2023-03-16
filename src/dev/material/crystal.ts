@@ -34,6 +34,7 @@ class CrystalItemAI extends EntityAI.AI {
         if(Math.random() < CHANCE && (blockId == VanillaBlockID.water || blockId == VanillaBlockID.flowing_water)){
             let item = Entity.getDroppedItem(this.entity);
             Entity.setDroppedItem(this.entity, 0, 0, 0);
+            Entity.damageEntity(this.entity, 999999);
             this.region.spawnDroppedItem(pos.x, pos.y, pos.z, item.id, item.count, item.data + 1);
         }
     }
@@ -56,6 +57,9 @@ class CrystalItem extends ItemCommon implements ItemBehavior {
         JavaItem.setShouldDespawn(this.id, false);
         this.max = max;
         this.name2 = name2;
+        for(let i = 1;i < max + 1;i++)
+            Item.addToCreative(this.id, 1, i);
+        Item.addCreativeGroup("crystal", "Crystal", [this.id]);
     }
 
     public onIconOverride(item: ItemInstance, isModUi: boolean): Item.TextureData {
