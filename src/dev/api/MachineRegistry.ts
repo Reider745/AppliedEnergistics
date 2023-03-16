@@ -53,6 +53,11 @@ namespace MachineRegisty {
         public canRecipe(input: ItemInstance[]): boolean {
             return !!this.get(input);
         }
+
+        public registerRecipeViewer(): RecipePool {
+            
+            return this;
+        }
     }
 }
 
@@ -107,6 +112,10 @@ class Machine extends TileEntityBase implements EnergyTile {
 
     public getEnergyCapacity(): number {
         return 1000;
+    }
+
+    public canEnergySystem(): boolean {
+        return false;
     }
 
     defaultValues: {progress: 0, energy: 0};
@@ -174,7 +183,7 @@ class Machine extends TileEntityBase implements EnergyTile {
 
         let result = this.checkRecipe(input, output);
 
-        if(this.energy && this.getEnergy() <= 0){
+        if(this.canEnergySystem() && this.getEnergy() <= 0){
             this.data.progress = Math.max(0, this.data.progress-1);
             this.container.sendChanges();
             return;
@@ -188,13 +197,12 @@ class Machine extends TileEntityBase implements EnergyTile {
                     item1.count += item2.count;
                 });
                 this.data.progress = 0;
-                
                 this.container.validateAll();
                 this.onRecipe();
             }
             this.container.setScale("progress", this.getProgress()/this.getProgressMax());
             this.data.progress++;
-            this.data.energy -= this.getEnergyСonsumption();
+            if(this.canEnergySystem()) this.data.energy -= this.getEnergyСonsumption();
             this.onTickRecipe(result);
         }
         

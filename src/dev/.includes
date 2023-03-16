@@ -9,8 +9,10 @@ api/BlockModel.ts
 api/AppliedEnergistics.ts
 api/SubTile.ts
 api/MachineRegistry.ts
+api/EntityTick.ts
 
 material/ore.ts
+material/crystal.ts
 
 blocks/SpecialType.ts
 blocks/other.js

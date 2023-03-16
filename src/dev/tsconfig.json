@@ -24,7 +24,9 @@
 		"api/AppliedEnergistics.ts",
 		"api/SubTile.ts",
 		"api/MachineRegistry.ts",
+		"api/EntityTick.ts",
 		"material/ore.ts",
+		"material/crystal.ts",
 		"blocks/SpecialType.ts",
 		"blocks/other.js",
 		"blocks/Controller.ts",
@@ -45,6 +47,7 @@
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\core-engine.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\energy-net.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\ParticlesCore.d.ts",
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\RecipeViewer.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\RenderUtil.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\StorageInterface.d.ts"
 	]

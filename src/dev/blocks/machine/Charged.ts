@@ -22,6 +22,10 @@ class ChargedTile extends Machine {
         return 100;
     }
 
+    public canEnergySystem(): boolean {
+        return true;
+    }
+
     protected animation: Animation.Item;
 
     public clientLoad(): void {
