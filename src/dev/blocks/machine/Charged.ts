@@ -1,12 +1,12 @@
 let RecipeCharged = new MachineRegisty.RecipePool("charged")
-    .add([new ItemStack(ItemID.ae_quartz, 1)], [new ItemStack(ItemID.ae_charged_quartz, 1)])
+    .add([new ItemStack(ItemID.ae_quartz, 1)], [new ItemStack(ItemID.ae_charged_quartz, 1)]);
 
 class ChargedTile extends Machine {
     public getInputSlots(side?: number): string[] {
         return ["slot"];
     }
 
-    public getOuputSlots(side?: number): string[] {
+    public getOutputSlots(side?: number): string[] {
         return ["slot"];
     }
 
@@ -74,20 +74,4 @@ class ChargedTile extends Machine {
     }
 }
 
-class ChargedBlock extends BlockRotative {
-    constructor(strId: string, name: string, texture: [string, number][], model: RenderUtil.Model){
-        super(strId);
-
-        this.addVariation(name, texture, true);
-        for(let i = 2;i < 6;i++)
-            model.rotate(i).setBlockModel(this.id, i);
-        model.rotate(3).setBlockModel(this.id, 0);
-        new ChargedTile(this.id, Ae);
-    }
-
-    getDrop(coords: Vector, block: Tile, level: number, enchant: ToolAPI.EnchantData, item: ItemStack, region: BlockSource): ItemInstanceArray[] {
-        return [[this.id, 1, 0]];
-    }
-}
-
-BlockRegistry.registerBlock(new ChargedBlock("ae_charged", "charged", [["charger_side", 0]], Charged))
+BlockRegistry.registerBlock(new MachineBlcok("ae_charged", "charged", [["charger_side", 0]], Charged, ChargedTile));

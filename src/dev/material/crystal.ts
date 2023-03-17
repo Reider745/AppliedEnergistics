@@ -30,7 +30,7 @@ class CrystalItemAI extends EntityAI.AI {
 
     public tick(): void {
         let pos = Entity.getPosition(this.entity);
-        let blockId = this.region.getBlockId(pos.x, pos.y, pos.z);
+        let blockId = this.region.getBlockId(pos.x, pos.y-.5, pos.z);
         if(Math.random() < CHANCE && (blockId == VanillaBlockID.water || blockId == VanillaBlockID.flowing_water)){
             let item = Entity.getDroppedItem(this.entity);
             Entity.setDroppedItem(this.entity, 0, 0, 0);

@@ -68,7 +68,7 @@ class Machine extends TileEntityBase implements EnergyTile {
         super();
         StorageInterface.createInterface(id, {
             getInputSlots: this.getInputSlots,
-            getOutputSlots: this.getOuputSlots
+            getOutputSlots: this.getOutputSlots
         });
         TileEntity.registerPrototype(id, this);
         if(energy){
@@ -132,7 +132,7 @@ class Machine extends TileEntityBase implements EnergyTile {
         return [];
     }
 
-    public getOuputSlots(side?: number): string[] {
+    public getOutputSlots(side?: number): string[] {
         return [];
     }
 
@@ -179,7 +179,7 @@ class Machine extends TileEntityBase implements EnergyTile {
         this.container.setScale("energy", this.data.energy/this.getEnergyCapacity());
 
         let input = this.getItems(this.getInputSlots());
-        let output = this.getItems(this.getOuputSlots());
+        let output = this.getItems(this.getOutputSlots());
 
         let result = this.checkRecipe(input, output);
 
@@ -192,7 +192,7 @@ class Machine extends TileEntityBase implements EnergyTile {
         if(result){
             if(this.getProgress() >= this.getProgressMax()){
                 this.setItems(this.getInputSlots(), result.input, (item1, item2) => item1.count -= item2.count);
-                this.setItems(this.getOuputSlots(), result.output, (item1, item2) => {
+                this.setItems(this.getOutputSlots(), result.output, (item1, item2) => {
                     item1.id = item2.id;
                     item1.count += item2.count;
                 });
@@ -221,8 +221,24 @@ class Machine extends TileEntityBase implements EnergyTile {
         return "main";
     }
 
-    public getScreenByName(screenName: string): UI.IWindow{
+    public getScreenByName(screenName: string): UI.IWindow {
         return null;
+    }
+}
+
+class MachineBlcok extends BlockRotative {
+    constructor(strId: string, name: string, texture: [string, number][], model: RenderUtil.Model, tile: any){
+        super(strId);
+
+        this.addVariation(name, texture, true);
+        for(let i = 2;i < 6;i++)
+            model.rotate(i).setBlockModel(this.id, i);
+        model.rotate(3).setBlockModel(this.id, 0);
+        new tile(this.id, Ae);
+    }
+
+    getDrop(coords: Vector, block: Tile, level: number, enchant: ToolAPI.EnchantData, item: ItemStack, region: BlockSource): ItemInstanceArray[] {
+        return [[this.id, 1, 0]];
     }
 }
 

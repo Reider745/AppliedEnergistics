@@ -25,6 +25,7 @@ blocks/display.ts
 blocks/bus.ts
 
 blocks/machine/Charged.ts
+blocks/machine/Carver.ts
 
 items/storage.ts
 

@@ -86,11 +86,12 @@ class ControllerTile extends TileEntityBase {
 				tiles.push(tile);
 			}else if(block.id == BlockID.ae_controller){
 				for(let i in tiles)
-				tiles[i].controller = undefined;
+					tiles[i].controller = undefined;
+
 				for(let i in cables)
 					cables[i].controller = undefined;
 					
-				return null;
+				return {mechanisms: [], cables: []};
 			}
 		}
 		return {mechanisms: tiles, cables: cables};
@@ -242,14 +243,18 @@ class ControllerTile extends TileEntityBase {
 		if(!arr) return;
 		for(let i in arr.mechanisms)
 			arr.mechanisms[i].controller = undefined;
+		
 		for(let i in arr.cables)
-			arr[i].controller = undefined;
+			if(arr.cables[i])
+				arr.cables[i].controller = undefined;
 	}
 
 	public onItemUse(coords: Callback.ItemUseCoordinates, item: ItemStack, player: number): boolean {
-		Debug.m(this.getStorageEnergy() +"/"+this.getStorageEnergyMax());
-		Debug.m(this.energy);
-		Debug.m(this.getItems());
+		if(__config__.getBool("debug")){
+			Debug.m(this.getStorageEnergy() +"/"+this.getStorageEnergyMax());
+			Debug.m(this.energy);
+			Debug.m(this.getItems());
+		}
 		return false;
 	}
 }
@@ -306,7 +311,7 @@ class ControllerBlock extends BlockBase {
 	constructor(strId: string, blockType: string | BlockType, name: string, disable: [string, number][], enable: [string, number][], layer: [string, number][][]){
 		super(strId, blockType);
 		this.addVariation(name, disable, true);
-		this.addVariation(name, enable, true);
+		this.addVariation(name, enable, false);
 		setBlockLayer(this.id, 1, layer);
 		new ControllerTile(this.id);
 	}

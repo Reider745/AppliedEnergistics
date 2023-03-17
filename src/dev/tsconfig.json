@@ -37,6 +37,7 @@
 		"blocks/display.ts",
 		"blocks/bus.ts",
 		"blocks/machine/Charged.ts",
+		"blocks/machine/Carver.ts",
 		"items/storage.ts",
 		"shared.ts"
 	],
@@ -44,6 +45,7 @@
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\android-declarations.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\android.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\BlockEngine.d.ts",
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\ClassicUI.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\core-engine.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\energy-net.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\ParticlesCore.d.ts",

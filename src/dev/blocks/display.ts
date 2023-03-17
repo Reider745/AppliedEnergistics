@@ -31,8 +31,8 @@ let DisplayUI = new UI.StandardWindow({
 	elements: {}
 });
 
-(function(){
-	let elements = DisplayUI.getWindow("inventory").content.elements;
+function setInventoryFunctions(ui){
+	let elements = ui.content.elements;
 	for(let key in elements){
 		let index = elements[key].index;
 		let obj = JSON.parse(JSON.stringify(elements[key]));
@@ -62,29 +62,36 @@ let DisplayUI = new UI.StandardWindow({
 		}
 		elements[key+"_"] = obj;
 	}
-})();
+};
+setInventoryFunctions(DisplayUI.getWindow("inventory"));
+
+ModAPI.addAPICallback("ClassicUI", (ClassicUI: ClassicUI) => {
+	ClassicUI.registerHandler(BlockID.ae_network_cable, {
+		postCreate(group, tile) {
+			try{
+			let n: any = group.getWindowContent("header").drawing[2];
+			if(n.text == "Display")
+				setInventoryFunctions(group.getWindow("header"));
+			}catch(e){alert(e)}
+		}
+	})
+});
 
 let DisplayTile;
 
-DisplayUI.getWindow("main").setEventListener({
-	onClose(){
-		DisplayUI.getContainer().getParent().sendEvent("event", {
-			name: "display_close"
-		});
-	},
-	onOpen(){
-		DisplayUI.getContainer().getParent().sendEvent("event", {
-			name: "display_open"
-		});
-	}
-});
 const SETTING_DISPLAY = {
 	x: 25,
 	y: 25,
-	size: 50,
-	line: 19
+	size: 950/12,
+	line: 12
 };
+
 class DisplaySubTile extends SubTile {
+	public open(container: ItemContainer, client: NetworkClient, str: string): void {
+		this.data.items = this.tile.controller.getItems();
+		this.updateList(this.data.items, SETTING_DISPLAY, this.tile.container);
+	}
+
 	public updateList(list, setting, container): void {
 		if(list.length == 0)
 			this.clearList(container);
@@ -105,40 +112,7 @@ class DisplaySubTile extends SubTile {
 			});
 		}
 	}
-	public getConnectionCable(): number {
-		return 6/16;
-	}
-	static clearListClient(content): void{
-		for(let key in content.elements){
-			let obj = content.elements[key];
-			obj.bitmap = "_default_slot_empty";
-			obj.visual = true;
-			obj.source = undefined;
-		}
-	}
-	static updateSlotClient(name, x, y, size, content, item, i): void {
-		if(content)
-			content.elements[name] = {type: "slot", x: x, y: y, size: size, source: item, visual: true, clicker: {
-				onClick(_, container){
-					container.sendEvent("event", {
-						name: "addedInventory",
-						count: 1,
-						slot: name,
-						i: i,
-						player: Number(Player.get())
-					});
-				},
-				onLongClick(_, container){
-					container.sendEvent("event", {
-						name: "addedInventory",
-						count: 64,
-						slot: name,
-						i: i,
-						player: Number(Player.get())
-					});
-				}
-			}};
-	}
+
 	public clearList(container): void{
 		container.sendEvent("event", {
 			id: this.data.id,
@@ -152,14 +126,20 @@ class DisplaySubTile extends SubTile {
 			actor.addItemToInventory(item.id, item.count, item.data, item.extra, true);
 		}
 	}
+
+	public getConnectionCable(): number {
+		return 6/16;
+	}
+
 	public serverEvent(data: any): void {
 		if(!this.tile.controller) return;
 		if(data.name == "addedInventory"){
 			this.data.items = this.tile.controller.getItems();
 			let item = this.data.items[data.i];
+			if(!item) return;
 			let count = data.count;
 			if(item.count - count < 0)//тут происходит какая-то ошибка item = undefined
-				count += item.count - count;
+				count += item.count - count;//Блять, ну раз происходит ошибка надо было сразу фиксить
 			item.count -= count;
 			if(item.count < 1)
 				this.data.items.splice(data.i, data.i);
@@ -193,13 +173,41 @@ class DisplaySubTile extends SubTile {
 			this.drop(data.player, this.tile.controller.setItems(this.data.items));
 			this.data.items = this.tile.controller.getItems();
 			this.updateList(this.data.items, SETTING_DISPLAY, this.tile.container);
-		}else if(data.name == "display_open"){
-			this.data.items = this.tile.controller.getItems();
-			this.updateList(this.data.items, SETTING_DISPLAY, this.tile.container);
-		}else{
 		}
 	}
 
+
+	static clearListClient(content): void{
+		for(let key in content.elements){
+			let obj = content.elements[key];
+			obj.bitmap = "_default_slot_empty";
+			obj.visual = true;
+			obj.source = undefined;
+		}
+	}
+	static updateSlotClient(name, x, y, size, content, item, i): void {
+		if(content)
+			content.elements[name] = {type: "slot", x: x, y: y, size: size, source: item, visual: true, clicker: {
+				onClick(_, container){
+					container.sendEvent("event", {
+						name: "addedInventory",
+						count: 1,
+						slot: name,
+						i: i,
+						player: Number(Player.get())
+					});
+				},
+				onLongClick(_, container){
+					container.sendEvent("event", {
+						name: "addedInventory",
+						count: 64,
+						slot: name,
+						i: i,
+						player: Number(Player.get())
+					});
+				}
+			}};
+	}
 	static clientEvent(container: com.zhekasmirnov.innercore.api.mod.ui.container.UiAbstractContainer, window: UI.IWindow, content: Nullable<UI.WindowContent>, data: any): void {
 		if(data.name == "updateSlotClient"){
 			if(data.clear)
@@ -217,5 +225,5 @@ class DisplaySubTile extends SubTile {
 	static getScreenByName(value: any, container: any): UI.IWindow {
 		return DisplayUI
 	}
-};
+}
 SubTileController.registry(ItemID.ae_display, DisplaySubTile);
