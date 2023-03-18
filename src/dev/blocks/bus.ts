@@ -202,7 +202,7 @@ class BusImportSubTile extends BusSubTile {
 		return "ae_bus_import";
 	}
 };
-createBus("import", BusImportSubTile, ImportBus(null, "ae_sides"));
+createBus("import", BusImportSubTile, ImportBus(null, "charger_side"));
 
 class BusExportSubTile extends BusSubTile {
 	public busLogic(): void {
@@ -233,4 +233,4 @@ class BusExportSubTile extends BusSubTile {
 		return "ae_bus_export";
 	}
 };
-createBus("export", BusExportSubTile, ExportBus(null, "ae_sides"));
+createBus("export", BusExportSubTile, ExportBus(null, "charger_side"));

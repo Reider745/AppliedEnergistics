@@ -82,8 +82,8 @@ let DisplayTile;
 const SETTING_DISPLAY = {
 	x: 25,
 	y: 25,
-	size: 950/12,
-	line: 12
+	size: 950/10,
+	line: 10
 };
 
 class DisplaySubTile extends SubTile {

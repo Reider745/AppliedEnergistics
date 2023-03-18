@@ -11,4 +11,4 @@ let Carver = (function(obj, texture_default, data_default){
 	model.addBoxByBlock("cube_6", 0.1875, 0.125, 0.1875, 0.3125, 0.9375, 0.8125, obj["cube_6"] ? obj["cube_6"].texture : texture, obj["cube_6"] ? obj["cube_6"].data : data);
 	model.addBoxByBlock("cube_7", 0.6875, 0.125, 0.1875, 0.8125, 0.9375, 0.8125, obj["cube_7"] ? obj["cube_7"].texture : texture, obj["cube_7"] ? obj["cube_7"].data : data);
 	return model;
-})();//boxes - 7
+})(null, "charger_side");//boxes - 7

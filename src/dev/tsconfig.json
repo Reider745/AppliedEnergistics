@@ -27,6 +27,7 @@
 		"api/EntityTick.ts",
 		"material/ore.ts",
 		"material/crystal.ts",
+		"material/craft.ts",
 		"blocks/SpecialType.ts",
 		"blocks/other.js",
 		"blocks/Controller.ts",

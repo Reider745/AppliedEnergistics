@@ -1,3 +1,4 @@
 {
-    "enable":true
+    "enable":true,
+    "debug":true
 }

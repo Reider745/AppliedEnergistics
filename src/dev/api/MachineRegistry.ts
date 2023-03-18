@@ -25,7 +25,8 @@ namespace MachineRegisty {
         private indexOf(check: ItemInstance[], item: ItemInstance, black: string[]): number {
             for(let i in check){
                 let _item = check[i];
-                if(_item.id == item.id && (_item.data == item.data || item.data == -1) && _item.count >= item.count){
+                if(black.indexOf(i) != -1) continue;
+                if(_item.id == item.id && (_item.data == item.data || item.data == -1) && (_item.count >= item.count || item.count == -1)){
                     black.push(i);
                     return Number(i);
                 }
@@ -36,16 +37,11 @@ namespace MachineRegisty {
         public get(input: ItemInstance[]): Nullable<RecipeData> {
             for(let i in this.recipes){
                 let recipe = this.recipes[i];
-                let result = false;
+                let result = true;
                 let black: string[] = [];
-                for(let a in recipe.input){
-                    let item = recipe.input[a];
-                    if(this.indexOf(input, item, black) == -1){
+                for(let a in recipe.input)
+                    if(this.indexOf(input, recipe.input[a], black) == -1)
                         result = false;
-                        break;
-                    }
-                    result = true;
-                }
                 if(result) return recipe;
             }
             return null;
@@ -176,7 +172,11 @@ class Machine extends TileEntityBase implements EnergyTile {
 
     public onTick(): void {
         StorageInterface.checkHoppers(this);
+
+        this.data.progress = this.data.progress || 0;
+        this.data.energy = this.data.energy || 0;
         this.container.setScale("energy", this.data.energy/this.getEnergyCapacity());
+        this.container.setScale("progress", this.getProgress()/this.getProgressMax());
 
         let input = this.getItems(this.getInputSlots());
         let output = this.getItems(this.getOutputSlots());
@@ -191,7 +191,9 @@ class Machine extends TileEntityBase implements EnergyTile {
 
         if(result){
             if(this.getProgress() >= this.getProgressMax()){
-                this.setItems(this.getInputSlots(), result.input, (item1, item2) => item1.count -= item2.count);
+                this.setItems(this.getInputSlots(), result.input, (item1, item2) => {
+                    if(item2.count != -1) item1.count -= item2.count;
+                });
                 this.setItems(this.getOutputSlots(), result.output, (item1, item2) => {
                     item1.id = item2.id;
                     item1.count += item2.count;
@@ -200,11 +202,11 @@ class Machine extends TileEntityBase implements EnergyTile {
                 this.container.validateAll();
                 this.onRecipe();
             }
-            this.container.setScale("progress", this.getProgress()/this.getProgressMax());
             this.data.progress++;
             if(this.canEnergySystem()) this.data.energy -= this.getEnergyСonsumption();
             this.onTickRecipe(result);
-        }
+        }else
+            this.data.progress = Math.max(0, this.data.progress-1);
         
         this.container.sendChanges();
     }

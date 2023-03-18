@@ -10,6 +10,7 @@
 	
 	IDRegistry.genBlockID("ae_network_cable");
 	Block.createBlock("ae_network_cable", cables, BLOCK_TYPE_CABLE);
+	Ae.registerWire(BlockID.ae_network_cable, 9e99);
 	for(let i in cables)
 		setWireModel("ae", BlockID.ae_network_cable, Number(i));
 	AppliedEnergistics.setFlag(BlockID.ae_network_cable, "cable");

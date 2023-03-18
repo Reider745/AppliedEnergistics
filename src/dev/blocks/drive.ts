@@ -16,7 +16,7 @@ let DriveUI = new UI.StandardWindow({
 });
 
 (function(){
-	const X = 50;
+	const X = 500-(180/2);
 	const Y = 25;
 	const size = 65;
 	
