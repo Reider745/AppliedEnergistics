@@ -147,7 +147,7 @@ class Machine extends TileEntityBase implements EnergyTile {
             for(let i in output){
                 let item1 = output[i];
                 let item2 = result.output[i];
-                if(item1.id != 0 && (item1.id != item2.id || item1.data != item2.data)) return null;
+                if((item1.id != 0 && (item1.id != item2.id || item1.data != item2.data)) || item1.count + item2.count > Item.getMaxStack(item2.id)) return null;
             }
             return result;
         }
@@ -168,6 +168,10 @@ class Machine extends TileEntityBase implements EnergyTile {
             func(item, items[i]);
             this.container.setSlot(slot, item);
         }
+    }
+
+    public canDegradationProgres(): boolean {
+        return true;
     }
 
     public onTick(): void {
@@ -205,7 +209,7 @@ class Machine extends TileEntityBase implements EnergyTile {
             this.data.progress++;
             if(this.canEnergySystem()) this.data.energy -= this.getEnergyСonsumption();
             this.onTickRecipe(result);
-        }else
+        }else if(this.canDegradationProgres())
             this.data.progress = Math.max(0, this.data.progress-1);
         
         this.container.sendChanges();
@@ -233,9 +237,11 @@ class MachineBlcok extends BlockRotative {
         super(strId);
 
         this.addVariation(name, texture, true);
-        for(let i = 2;i < 6;i++)
-            model.rotate(i).setBlockModel(this.id, i);
-        model.rotate(3).setBlockModel(this.id, 0);
+        if(model){
+            for(let i = 2;i < 6;i++)
+                model.rotate(i).setBlockModel(this.id, i);
+            model.rotate(3).setBlockModel(this.id, 0);
+        }
         new tile(this.id, Ae);
     }
 
