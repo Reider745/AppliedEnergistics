@@ -232,15 +232,21 @@ class Machine extends TileEntityBase implements EnergyTile {
     }
 }
 
-class MachineBlcok extends BlockRotative {
-    constructor(strId: string, name: string, texture: [string, number][], model: RenderUtil.Model, tile: any){
+class MachineBlock extends BlockRotative {
+    constructor(strId: string, name: string, texture: [string, number][], model: RenderUtil.Model | RenderUtil.Model[], tile: any){
         super(strId);
 
         this.addVariation(name, texture, true);
         if(model){
-            for(let i = 2;i < 6;i++)
-                model.rotate(i).setBlockModel(this.id, i);
-            model.rotate(3).setBlockModel(this.id, 0);
+            if(!Array.isArray(model)){
+                for(let i = 2;i < 6;i++)
+                    model.rotate(i).setBlockModel(this.id, i);
+                model.rotate(3).setBlockModel(this.id, 0);
+            }else{
+                for(let i = 2;i < 6;i++)
+                    model[i-2].setBlockModel(this.id, i);
+                model[0].setBlockModel(this.id, 0);
+            }
         }
         new tile(this.id, Ae);
     }

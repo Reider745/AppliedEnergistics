@@ -74,4 +74,4 @@ class ChargedTile extends Machine {
     }
 }
 
-BlockRegistry.registerBlock(new MachineBlcok("ae_charged", "charged", [["charger_side", 0]], Charged, ChargedTile));
+BlockRegistry.registerBlock(new MachineBlock("ae_charged", "charged", [["charger_side", 0]], Charged, ChargedTile));

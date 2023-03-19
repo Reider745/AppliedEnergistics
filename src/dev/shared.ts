@@ -1,7 +1,7 @@
 ModAPI.registerAPI("AppliedEnergistics", {
     MachineRegisty: MachineRegisty,
     Machine: Machine,
-    MachineBlcok: MachineBlcok,
+    MachineBlcok: MachineBlock,
     AppliedTile: AppliedTile,
     SubTile: SubTile,
     SubTileController: SubTileController,

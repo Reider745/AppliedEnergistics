@@ -57,4 +57,4 @@ class CarverTile extends Machine {
     }
 };
 
-BlockRegistry.registerBlock(new MachineBlcok("ae_carver", "Carver", [["charger_side", 0]], Carver, CarverTile));
+BlockRegistry.registerBlock(new MachineBlock("ae_carver", "Carver", [["charger_side", 0]], Carver, CarverTile));
