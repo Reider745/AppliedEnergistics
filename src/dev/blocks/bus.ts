@@ -183,7 +183,7 @@ class BusImportSubTile extends BusSubTile {
 				(function(items){
 					for(let i in items){
 						let it = items[i];
-						if(it.id == item.id){
+						if(it.id == item.id && it.data == item.data && !item.extra && !it.extra){
 							it.count += item.count;
 							return;
 						}

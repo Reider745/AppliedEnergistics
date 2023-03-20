@@ -136,7 +136,7 @@ class DisplaySubTile extends SubTile {
 		if(data.name == "addedInventory"){
 			this.data.items = this.tile.controller.getItems();
 			let item = this.data.items[data.i];
-			if(!item) return;
+			if(!item) return;//временное решение
 			let count = data.count;
 			if(item.count - count < 0)//тут происходит какая-то ошибка item = undefined
 				count += item.count - count;//Блять, ну раз происходит ошибка надо было сразу фиксить
@@ -163,7 +163,7 @@ class DisplaySubTile extends SubTile {
 			(function(items){
 				for(let i in items){
 					let it = items[i];
-					if(it.id == item.id){
+					if(it.id == item.id && it.data == item.data && !item.extra && !it.extra){
 						it.count += item.count;
 						return;
 					}
