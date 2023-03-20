@@ -2,6 +2,7 @@ IDRegistry.genItemID("ae_display");
 Item.createItem("ae_display", "Display", {name: "", meta: 0}, {stack: 64});
 
 (function(){
+	const p = 2/16;
 	for(let i = 0;i < 6;i++){
 		let textures = [];
 		for(let a = 0;a < 6;a++)
@@ -9,6 +10,9 @@ Item.createItem("ae_display", "Display", {name: "", meta: 0}, {stack: 64});
 			else textures.push(["ae_sides", 0]);
 		TerminalModel(ItemID.ae_display, textures, i, "ae_display");
 	}
+	new RenderUtil.Model()
+			.add(p, p, 1-p, 1-p, 1-p, 1+LAYER, [["ae_sides", 0], ["ae_sides", 0], ["ae_sides", 0], ["ae_terminal", 0], ["ae_sides", 0], ["ae_sides", 0]])
+			.setItemModel(ItemID.ae_display);
 })();
 
 Item.registerUseFunctionForID(ItemID.ae_display, funcAddedFacede);

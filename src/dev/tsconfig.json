@@ -37,10 +37,13 @@
 		"blocks/facede.ts",
 		"blocks/display.ts",
 		"blocks/bus.ts",
+		"blocks/decor.ts",
 		"blocks/machine/Charged.ts",
 		"blocks/machine/Carver.ts",
 		"blocks/machine/GrindStone.ts",
 		"items/storage.ts",
+		"items/tool.ts",
+		"Workbench.ts",
 		"shared.ts"
 	],
 	"files": [

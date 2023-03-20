@@ -1,3 +1,12 @@
+ItemRegistry.createItem("ae_facade_cable_anchor", {
+	name: "Cable_anchor",
+	icon: "",
+	inCreative: true
+});
+new RenderUtil.Model()
+	.add(5/16, 7/16, 7/16, 10/16, 9/16, 9/16, "charger_side")
+	.setItemModel(ItemID.ae_facade_cable_anchor);
+
 let faceds = [];
 function createFacede(textId, id, data){
 	const facade = "ae_facade_"+textId +(data === 0 ? "" : data);
@@ -21,11 +30,18 @@ function createFacede(textId, id, data){
 	for(let i = 0;i < 6;i++)
 		FacedeModel(null, id, data, i, facade);
 	faceds.push({item: ItemID[facade], id: id});
+
+	Recipes.addShaped({id: ItemID[facade], count: 1, data: 0}, [
+		" b ",
+		"bab",
+		" b "
+	], ["a", id, 0, "b", ItemID.ae_facade_cable_anchor, 0]);
+	Item.addCreativeGroup("facade", "Facade", [ItemID[facade]]);
 }
+let JsonFacade: {id: string, textId?: string, datas?: number[]}[] = FileTools.ReadJSON(__dir__+"facede.json");
 Callback.addCallback("ModsLoaded", function(){
-	let json: {id: string, textId?: string, datas?: number[]}[] = FileTools.ReadJSON(__dir__+"facede.json");
-	for(let i in json){
-		let obj = json[i];
+	for(let i in JsonFacade){
+		let obj = JsonFacade[i];
 		let split = obj.id.split(".");
 		if(split.length == 2) var textId = split[1];
 		else var textId = obj.textId;
