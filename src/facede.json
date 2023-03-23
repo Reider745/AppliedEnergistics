@@ -18,5 +18,7 @@
     {"id":"VanillaBlockID.coal_block"},
     {"id":"VanillaBlockID.coal_ore"},
 
-    {"id":"VanillaBlockID.planks","datas":[0, 1, 2, 3, 4, 5]}
+    {"id":"VanillaBlockID.planks","datas":[0, 1, 2, 3, 4, 5]},
+
+    {"id":"VanillaBlockID.tnt"}
 ]

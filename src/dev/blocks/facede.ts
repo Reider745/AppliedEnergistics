@@ -1,11 +1,30 @@
 ItemRegistry.createItem("ae_facade_cable_anchor", {
-	name: "Cable_anchor",
+	name: "Cable anchor",
 	icon: "",
 	inCreative: true
 });
 new RenderUtil.Model()
 	.add(5/16, 7/16, 7/16, 10/16, 9/16, 9/16, "charger_side")
 	.setItemModel(ItemID.ae_facade_cable_anchor);
+
+Callback.addCallback("PostLoaded", function(){
+	for(let i in cutting_knifes){
+		let id = cutting_knifes[i];
+
+		Recipes.addShapeless({id: ItemID.ae_facade_cable_anchor, count: 3, data: 0}, [
+			{id: VanillaItemID.iron_ingot, data: 0}, {id: id, data: -1}
+		], function(api, field, result, player){
+			for(let i = 0; i < field.length; i++){
+				if (field[i].id == id){
+					field[i].data++;
+					if (field[i].data >= Item.getMaxDamage(id))
+						field[i].id = field[i].count = field[i].data = 0;
+				}else
+					api.decreaseFieldSlot(i);
+			}
+		});
+	}
+})
 
 let faceds = [];
 function createFacede(textId, id, data){

@@ -43,7 +43,7 @@
 		"blocks/machine/GrindStone.ts",
 		"items/storage.ts",
 		"items/tool.ts",
-		"Workbench.ts",
+		"recipes.ts",
 		"shared.ts"
 	],
 	"files": [

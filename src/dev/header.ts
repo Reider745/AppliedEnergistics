@@ -34,7 +34,7 @@ function pushToArray(arr1, arr2){
 		arr1.push(arr2[i]);
 }
 
-ItemModel.setCurrentCacheGroup("AppliedEnergistics", "pre-alpha 1.0");
+ItemModel.setCurrentCacheGroup("AppliedEnergistics", "pre-alpha 0.1(preview 2.0)");
 
 function addConnect(id, data: number = -1, group: string = "ae"){
 	ICRender.getGroup(group).add(id, data);

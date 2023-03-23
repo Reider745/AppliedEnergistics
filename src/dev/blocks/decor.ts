@@ -35,22 +35,3 @@ registerDecorsBlock("sky_stone_block", "Sky stone block");
 registerDecorsBlock("sky_stone_brick", "Sky stone brick");
 registerDecorsBlock("sky_stone_small_brick", "Sky stone small brick");
 registerDecorsBlock("smooth_sky_stone_block", "Smooth sky stone block");
-
-Recipes.addShaped({id: BlockID.ae_smooth_sky_stone_block, count: 1, data: 0}, [
-    "a",
-    "",
-    ""
-], ["a", BlockID.ae_sky_stone_small_brick, 0]);
-
-Recipes.addShaped({id: BlockID.ae_sky_stone_small_brick, count: 1, data: 0}, [
-    "a",
-    "",
-    ""
-], ["a", BlockID.ae_sky_stone_brick, 0]);
-Recipes.addShaped({id: BlockID.ae_sky_stone_brick, count: 1, data: 0}, [
-    "a",
-    "",
-    ""
-], ["a", BlockID.ae_smooth_sky_stone_block, 0]);
-
-Recipes.addFurnace(BlockID.ae_sky_stone_block, BlockID.ae_smooth_sky_stone_block, 0);
