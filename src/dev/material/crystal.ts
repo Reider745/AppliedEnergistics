@@ -12,6 +12,22 @@ class CrystalItemAI extends EntityAI.AI {
     public crystal_info: CrystalInfo;
     public region: BlockSource;
 
+    private coordPlus(x: number): number {
+        let xx = x - Math.floor(x);
+        if(xx > .8)
+            return Math.floor(x + .25);
+        return Math.floor(x);
+    }
+
+    public canWater(x: number, y: number, z: number): boolean {
+        y = Math.floor(y-.5);
+        x = this.coordPlus(x);
+        z = this.coordPlus(z);
+
+        let id = this.region.getBlockId(x, y, z);
+        return id == VanillaBlockID.water || id == VanillaBlockID.flowing_water;
+    }
+
     public canCreate(): boolean {
         let item = Entity.getDroppedItem(this.entity);
         for(let i in CrystalItemAI.ITEM_LIST){
@@ -30,8 +46,7 @@ class CrystalItemAI extends EntityAI.AI {
 
     public tick(): void {
         let pos = Entity.getPosition(this.entity);
-        let blockId = this.region.getBlockId(pos.x, pos.y-.5, pos.z);
-        if(Math.random() < CHANCE && (blockId == VanillaBlockID.water || blockId == VanillaBlockID.flowing_water)){
+        if(Math.random() < CHANCE && this.canWater(pos.x, pos.y, pos.z)){
             let item = Entity.getDroppedItem(this.entity);
             Entity.setDroppedItem(this.entity, 0, 0, 0);
             Entity.damageEntity(this.entity, 999999);
