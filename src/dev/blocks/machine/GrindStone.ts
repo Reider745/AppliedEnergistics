@@ -64,6 +64,12 @@ class GrindStoneTile extends Machine {
 
 
 BlockRegistry.registerBlock(new MachineBlock("ae_grind_stone", "Grind stone", [["grindstone_side", 0], ["grindstone", 0], ["grindstone_side", 0], ["grindstone_front", 0], ["grindstone_side", 0], ["grindstone_side", 0]], null, GrindStoneTile));
+GrindStoneRecipe.registerRecipeViewer("Grind stone", BlockID.ae_grind_stone, {
+    elements: {
+        input0: {type: "slot", x: 100, y: 100, size: 100},
+        output0: {type: "slot", x: 300, y: 100, size: 100}
+    }
+});
 
 
 class GrindStonePenTile extends TileEntityBase implements EnergyTile {

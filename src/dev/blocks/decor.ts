@@ -35,3 +35,23 @@ registerDecorsBlock("sky_stone_block", "Sky stone block");
 registerDecorsBlock("sky_stone_brick", "Sky stone brick");
 registerDecorsBlock("sky_stone_small_brick", "Sky stone small brick");
 registerDecorsBlock("smooth_sky_stone_block", "Smooth sky stone block");
+
+Translation.addTranslation("Fluix block", {
+    ru: "Изменчивый блок"
+});
+
+Translation.addTranslation("Sky stone block", {
+    ru: "Небесный каменный блок"
+});
+
+Translation.addTranslation("Sky stone brick", {
+    ru: "Небесный каменный кирпич"
+});
+
+Translation.addTranslation("Sky stone small brick", {
+    ru: "Небесный камень маленький кирпич"
+});
+
+Translation.addTranslation("Smooth sky stone block", {
+    ru: "Гладкий небесный камень"
+});

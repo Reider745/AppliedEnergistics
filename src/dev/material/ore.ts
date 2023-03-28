@@ -27,3 +27,28 @@ ItemRegistry.registerItem(new QuartzItem("ae_charged_quartz", "Charged quartz", 
 }));
 BlockRegistry.registerBlock(new BlockOre("ae_quartz_ore", "Quartz ore", ["quartz_ore", 0], ItemID.ae_quartz));
 BlockRegistry.registerBlock(new BlockOre("ae_charged_quartz_ore", "Charged quartz ore", ["charged_quartz_ore", 0], ItemID.ae_charged_quartz));
+
+Translation.addTranslation("Quartz ore", {
+    ru: "Кварцевая руда"
+});
+
+Translation.addTranslation("Charged quartz ore", {
+    ru: "Заряженная кварцевая руда"
+});
+
+Translation.addTranslation("Quartz", {
+    ru: "Кварц"
+});
+
+Translation.addTranslation("Charged quartz", {
+    ru: "Заряженный кварц"
+});
+
+
+Callback.addCallback("GenerateChunk", function(X, Z, random, id, chunkSeed, worldSeed, dimensionSeed){
+    for(let i = 0;i < 4;i++)
+        if(random.nextFloat() < .8)
+            GenerationUtils.generateOre(X*16+random.nextInt(16), 10+random.nextInt(40), Z*16+random.nextInt(16), BlockID.ae_quartz_ore, 0, 4, false, dimensionSeed);
+        else
+        GenerationUtils.generateOre(X*16+random.nextInt(16), 10+random.nextInt(40), Z*16+random.nextInt(16), BlockID.ae_charged_quartz_ore, 0, 4, false, dimensionSeed);
+});

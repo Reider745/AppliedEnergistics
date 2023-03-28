@@ -12,9 +12,24 @@ namespace MachineRegisty {
 
     export class RecipePool {
         protected recipes: RecipeData[] = [];
+        protected id: string;
 
         constructor(name: string){
+            this.id = name;
             groups[name] = this;
+        }
+
+        public getRecipes(): RecipeData[] {
+            return this.recipes;
+        }
+
+        public setRecipes(recipes: RecipeData[]): RecipePool {
+            this.recipes = recipes;
+            return this;
+        }
+        
+        public getId(): string {
+            return this.id;
         }
 
         public add(input: ItemInstance[], output: ItemInstance[], info?: any): RecipePool {
@@ -50,8 +65,28 @@ namespace MachineRegisty {
             return !!this.get(input);
         }
 
-        public registerRecipeViewer(): RecipePool {
-            
+        public registerRecipeViewer(name: string, icon: number | Tile, content: {
+            params?: UI.BindingsSet;
+            drawing?: UI.DrawingElements;
+            elements: {
+                [key: string]: Partial<UI.UIElement>;
+            };
+        }): RecipePool {
+            let self = this;
+            Callback.addCallback("CoreConfigured", function(){
+                ModAPI.addAPICallback("RecipeViewer", (api: any) => {
+                    const Recipe: typeof RecipeType = api.RecipeType;
+                    const RecipeRegistry: typeof RecipeTypeRegistry = api.RecipeTypeRegistry;
+
+                    class RecipeViewer extends Recipe {
+                        getAllList(): RecipePattern[] {
+                            return self.recipes;
+                        }
+                    }
+
+                    RecipeRegistry.register(self.getId(), new RecipeViewer(name, icon, content));
+                });
+            });
             return this;
         }
     }

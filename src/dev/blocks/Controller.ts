@@ -1,34 +1,3 @@
-/*IDRegistry.genBlockID("ae_controller");
-Block.createBlock("ae_controller", [
-	{
-		name: "Controller",
-		texture: [["ae_controller", 0]],
-		inCreative: true
-	},
-	{
-		name: "Controller",
-		texture: [["ae_controller_powered", 0]],
-		inCreative: true
-	}
-], BLOCK_TYPE_CONTROLLER);
-
-setBlockLayer(BlockID.ae_controller, 1, [
-	[["ae_controller_lights", 0]]
-]);
-
-const CHECK_POS = [
-	{x: -1, y: 0, z: 0},
-	{x: 1, y: 0, z: 0},
-	{x: 0, y: -1, z: 0},
-	{x: 0, y: 1, z: 0},
-	{x: 0, y: 0, z: -1},
-	{x: 0, y: 0, z: 1},
-];
-
-Block.registerDropFunction("ae_controller", function(){
-	return [[BlockID.ae_controller, 1, 0]];
-});*/
-
 const CHECK_POS = [
 	{x: -1, y: 0, z: 0},
 	{x: 1, y: 0, z: 0},
@@ -321,6 +290,10 @@ class ControllerBlock extends BlockBase {
 	}
 }
 
-BlockRegistry.registerBlock(new ControllerBlock("ae_controller", BLOCK_TYPE_CONTROLLER, "Controller", [["ae_controller", 0]], [["ae_controller_powered", 0]],  [
+BlockRegistry.registerBlock(new ControllerBlock("ae_controller", BLOCK_TYPE_CONTROLLER, "ME Controller", [["ae_controller", 0]], [["ae_controller_powered", 0]],  [
 	[["ae_controller_lights", 0]]
 ]));
+
+Translation.addTranslation("ME Controller", {
+	ru: "ME Контроллер"
+});

@@ -82,10 +82,31 @@ class CrystalItem extends ItemCommon implements ItemBehavior {
     }
 
     public onNameOverride(item: ItemInstance, translation: string, name: string): string {
-        return (item.data < this.max ? translation : this.name2)+"\nstage: "+item.data;
+        return (item.data < this.max ? translation : Translation.translate(this.name2))+"\nstage: "+item.data;
     }
 }
 
 ItemRegistry.registerItem(new CrystalItem("crystal_seed_certus", "Crystal seed certus", "Crystal certus", "crystal_seed_certus", 3));
 ItemRegistry.registerItem(new CrystalItem("crystal_seed_fluix", "Crystal seed fluix", "Crystal fluix", "crystal_seed_fluix", 3));
 ItemRegistry.registerItem(new CrystalItem("crystal_seed_nether", "Crystal seed nether", "Crystal nether", "crystal_seed_nether", 3));
+
+Translation.addTranslation("Crystal seed certus", {
+    ru: "Хрустальные семена certus"
+});
+Translation.addTranslation("Crystal certus", {
+    ru: "Кристалл цертус"
+});
+
+Translation.addTranslation("Crystal seed fluix", {
+    ru: "Семена изменчивого кристаллла"
+});
+Translation.addTranslation("Crystal fluix", {
+    ru: "Изменчивый кристалл"
+});
+
+Translation.addTranslation("Crystal seed nether", {
+    ru: "Семена кристалл кварца нижнего мира"
+});
+Translation.addTranslation("Crystal nether", {
+    ru: "Кристалл кварца нижнего мира"
+});

@@ -1,5 +1,4 @@
-let RecipeCharged = new MachineRegisty.RecipePool("charged")
-    .add([new ItemStack(ItemID.ae_quartz, 1)], [new ItemStack(ItemID.ae_charged_quartz, 1)]);
+let RecipeCharged = new MachineRegisty.RecipePool("charged");
 
 class ChargedTile extends Machine {
     public getInputSlots(side?: number): string[] {
@@ -75,3 +74,9 @@ class ChargedTile extends Machine {
 }
 
 BlockRegistry.registerBlock(new MachineBlock("ae_charged", "charged", [["charger_side", 0]], Charged, ChargedTile));
+RecipeCharged.registerRecipeViewer("Charged", BlockID.ae_charged, {
+    elements: {
+        input0: {type: "slot", x: 100, y: 100, size: 100},
+        output0: {type: "slot", x: 300, y: 100, size: 100}
+    }
+});

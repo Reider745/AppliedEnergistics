@@ -7,6 +7,10 @@ Block.createBlock("ae_energy_acceptor", [
 	}
 ], BLOCK_TYPE_CONTROLLER);
 
+Translation.addTranslation("Energy acceptor", {
+	ru: "Приёмщик энергии"
+});
+
 class EnergyAcceptor extends AppliedTile implements EnergyTile{
 	constructor(id: number){
 		super(id);

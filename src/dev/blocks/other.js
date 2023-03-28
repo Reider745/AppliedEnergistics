@@ -3,10 +3,14 @@
 	
 	for(let i in COLORS)
 		cables.push({
-			name: "Cable",
+			name: "ME glass cable "+COLORS[i],
 			texture: [["ae_cable_"+COLORS[i], 0]],
 			inCreative: true
 		});
+	
+	Translation.addTranslation("ME glass cable "+COLORS[i], {
+		ru: "ME стеклянный кабель "+COLORS[i]
+	});
 	
 	IDRegistry.genBlockID("ae_network_cable");
 	Block.createBlock("ae_network_cable", cables, BLOCK_TYPE_CABLE);

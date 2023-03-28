@@ -1,19 +1,35 @@
-IDRegistry.genItemID("ae_display"); 
-Item.createItem("ae_display", "Display", {name: "", meta: 0}, {stack: 64});
+Translation.addTranslation("Dispaly", {
+	ru: "Экран"
+});
 
-(function(){
+
+ItemRegistry.createItem("ae_display_material", {
+	name: "Display",
+	icon: ""
+});
+
+
+ItemRegistry.createItem("ae_display", {
+	name: "Display",
+	icon: ""
+});
+
+function setModelDisplay(id: number, texture1: [string, number] = ["ae_sides", 0], texture2: [string, number] = ["ae_terminal", 0], group: string = "ae_display"): void {
 	const p = 2/16;
 	for(let i = 0;i < 6;i++){
 		let textures = [];
 		for(let a = 0;a < 6;a++)
-			if(a == i) textures.push(["ae_terminal", 0]);
-			else textures.push(["ae_sides", 0]);
-		TerminalModel(ItemID.ae_display, textures, i, "ae_display");
+			if(a == i) textures.push(texture2);
+			else textures.push(texture1);
+		TerminalModel(id, textures, i, group);
 	}
 	new RenderUtil.Model()
-			.add(p, p, 1-p, 1-p, 1-p, 1+LAYER, [["ae_sides", 0], ["ae_sides", 0], ["ae_sides", 0], ["ae_terminal", 0], ["ae_sides", 0], ["ae_sides", 0]])
-			.setItemModel(ItemID.ae_display);
-})();
+		.add(p, p, 1-p, 1-p, 1-p, 1+LAYER, [texture1, texture1, texture1, texture2, texture1, texture1])
+		.setItemModel(id);
+};
+
+setModelDisplay(ItemID.ae_display);
+setModelDisplay(ItemID.ae_display_material, undefined, ["monitor_back", 0], "ae_display_material");
 
 Item.registerUseFunctionForID(ItemID.ae_display, funcAddedFacede);
 AppliedEnergistics.setFlag(ItemID.ae_display, "display");

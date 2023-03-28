@@ -14,6 +14,9 @@ api/EntityTick.ts
 material/ore.ts
 material/crystal.ts
 material/craft.ts
+material/core.ts
+material/processor.ts
+material/dust.ts
 
 blocks/SpecialType.ts
 blocks/other.js
