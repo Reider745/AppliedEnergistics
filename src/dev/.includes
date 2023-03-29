@@ -17,6 +17,7 @@ material/craft.ts
 material/core.ts
 material/processor.ts
 material/dust.ts
+material/other.ts
 
 blocks/SpecialType.ts
 blocks/other.js

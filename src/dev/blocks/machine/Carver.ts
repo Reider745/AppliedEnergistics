@@ -5,8 +5,7 @@ namespace Processor {
     export const Silicon = new ItemStack(ItemID.ae_silicon_press, -1, 0);
 }
 
-let RecipeCarver = new MachineRegisty.RecipePool("carver")
-    .add([new ItemStack(263, 1, 0), Processor.Calculation, new ItemStack(263, 1, 0)], [new ItemStack(264, 1, 0)]);
+let RecipeCarver = new MachineRegisty.RecipePool("carver");
 
 let CarverUI = new UI.StandartWindow({
     standard: {
@@ -58,3 +57,12 @@ class CarverTile extends Machine {
 };
 
 BlockRegistry.registerBlock(new MachineBlock("ae_carver", "Carver", [["charger_side", 0]], Carver, CarverTile));
+RecipeCarver.registerRecipeViewer("Carver", BlockID.ae_carver, {
+    elements: {
+        input0: {type: "slot", x: 100, y: 100, size: 100},
+        input1: {type: "slot", x: 210, y: 210, size: 100},
+        input2: {type: "slot", x: 100, y: 320, size: 100},
+
+        output0: {type: "slot", x: 420, y: 210, size: 100}
+    }
+})

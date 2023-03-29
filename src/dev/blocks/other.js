@@ -1,3 +1,4 @@
+const DATA_CABLE_DEFAULT = COLORS.indexOf("purple");
 (function(){
 	let cables = [];
 	
@@ -15,8 +16,15 @@
 	IDRegistry.genBlockID("ae_network_cable");
 	Block.createBlock("ae_network_cable", cables, BLOCK_TYPE_CABLE);
 	Ae.registerWire(BlockID.ae_network_cable, 9e99);
-	for(let i in cables)
+
+	for(let i in cables){
 		setWireModel("ae", BlockID.ae_network_cable, Number(i));
+		Recipes.addShaped({id: BlockID.ae_network_cable, count: 8, data: Number(i)}, [
+			"aaa",
+			"aba",
+			"aaa"
+		], ["a", BlockID.ae_network_cable, DATA_CABLE_DEFAULT, "b", VanillaItemID.dye, Number(i)]);
+	}
 	AppliedEnergistics.setFlag(BlockID.ae_network_cable, "cable");
 		Item.addCreativeGroup("aecables", Translation.translate("Cables"), [
 			BlockID.ae_network_cable

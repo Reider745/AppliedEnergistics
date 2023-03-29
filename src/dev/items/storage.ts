@@ -1,8 +1,19 @@
 function createStorage(storages: number[], prefix: string): void{
 	for(let i in storages){
 		let storage = storages[i];
-		IDRegistry.genItemID("ae_storage_"+storage); 
-		Item.createItem("ae_storage_"+storage, "Disk storage "+storage+"k", {name: prefix+storage+"k", meta: 0}, {stack: 1, isTech: true});
+
+		/*ItemRegistry.createItem("ae_storage_"+storage, {
+			name: "Disk storage "+storage+"k",
+			icon: prefix+storage+"k",
+			stack: 1
+		})*/
+
+		ItemRegistry.createItem("ae_storage_"+storage, {
+			name: "Disk storage "+storage+"k",
+			icon: prefix+storage+"k",
+			stack: 1
+		})
+
 		Translation.addTranslation("Disk storage "+storage+"k", {
 			ru: "Диск хранения "+storage+"k"
 		});
