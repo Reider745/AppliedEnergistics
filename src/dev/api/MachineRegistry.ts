@@ -112,19 +112,17 @@ namespace MachineRegisty {
             };
         }): RecipePool {
             let self = this;
-            Callback.addCallback("CoreConfigured", function(){
-                ModAPI.addAPICallback("RecipeViewer", (api: any) => {
-                    const Recipe: typeof RecipeType = api.RecipeType;
-                    const RecipeRegistry: typeof RecipeTypeRegistry = api.RecipeTypeRegistry;
+            ModAPI.addAPICallback("RecipeViewer", (api: any) => {
+                const Recipe: typeof RecipeType = api.RecipeType;
+                const RecipeRegistry: typeof RecipeTypeRegistry = api.RecipeTypeRegistry;
 
-                    class RecipeViewer extends Recipe {
-                        getAllList(): RecipePattern[] {
-                            return self.recipes;
-                        }
+                class RecipeViewer extends Recipe {
+                    getAllList(): RecipePattern[] {
+                        return self.recipes;
                     }
+                }
 
-                    RecipeRegistry.register(self.getId(), new RecipeViewer(name, icon, content));
-                });
+                RecipeRegistry.register(self.getId(), new RecipeViewer(name, icon, content));
             });
             return this;
         }

@@ -1,14 +1,17 @@
 toolchain/build
 toolchain/temp
 toolchain/ndk
+toolchain/adb
+toolchain/bin
+toolchain/python
+
 output
 .idea
 .settings
 **/__pycache__
 **/tsconfig.jsons
-src/lib
 
+*.bat
 *.log
 *.icmod
-toolchain
 .vscode

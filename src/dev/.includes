@@ -39,4 +39,6 @@ items/tool.ts
 
 recipes.ts
 
+meteorit.ts
+
 shared.ts

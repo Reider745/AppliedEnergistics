@@ -48,6 +48,7 @@
 		"items/storage.ts",
 		"items/tool.ts",
 		"recipes.ts",
+		"meteorit.ts",
 		"shared.ts"
 	],
 	"files": [
@@ -57,6 +58,8 @@
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\ClassicUI.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\ConnectedTexture.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\core-engine.d.ts",
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\DependenceHelper.d.ts",
+		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\DungeonUtility.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\energy-net.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\ParticlesCore.d.ts",
 		"C:\\vs\\AppliedEnergistics\\toolchain\\declarations\\RecipeViewer.d.ts",
