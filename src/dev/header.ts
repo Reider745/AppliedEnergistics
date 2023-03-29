@@ -4,6 +4,7 @@ IMPORT("TextureWorker");
 IMPORT("StorageInterface");
 IMPORT("BlockEngine");
 IMPORT("ParticlesCore");
+IMPORT("ConnectedTexture");
 
 const EMPTY_ITEM:ItemInstance = {id: 0, count: 0, data: 0};
 
@@ -59,3 +60,9 @@ function funcAddedFacede(pos, item, block, player){
 const CALBLE_TICK = function(){
 	getController(this).useAll("tick");
 };
+
+ItemRegistry.createItem("icon_info", {
+	name: "",
+	icon: "icon_info",
+	inCreative: true
+});

@@ -37,7 +37,7 @@ namespace MachineRegisty {
             return this;
         }
 
-        private indexOf(check: ItemInstance[], item: ItemInstance, black: string[]): number {
+        public indexOf(check: ItemInstance[], item: ItemInstance, black: string[]): number {
             for(let i in check){
                 let _item = check[i];
                 if(black.indexOf(i) != -1) continue;
@@ -49,6 +49,12 @@ namespace MachineRegisty {
             return -1;
         }
 
+        public itemOf(check: ItemInstance[], item: ItemInstance, black: string[]): Nullable<ItemInstance> {
+            let index = this.indexOf(check, item, black);
+            if(index == -1) return null;
+            return check[index];
+        }
+
         public get(input: ItemInstance[]): Nullable<RecipeData> {
             for(let i in this.recipes){
                 let recipe = this.recipes[i];
@@ -57,12 +63,30 @@ namespace MachineRegisty {
                 for(let a in recipe.input)
                     if(this.indexOf(input, recipe.input[a], black) == -1)
                         result = false;
-                if(result) return recipe;
+                if(result && recipe.input.length == input.length) return recipe;
             }
             return null;
         }
+
+        public getPossibleRecipe(input: ItemInstance[]): RecipeData[] {
+            let result = [];
+            for(let i in this.recipes){
+                let recipe = this.recipes[i];
+                for(let a in recipe.input)
+                    if(this.indexOf(input, recipe.input[a], []) == -1){
+                        result.push(recipe);
+                        break;
+                    }
+            }
+            return result;
+        }
+
         public canRecipe(input: ItemInstance[]): boolean {
             return !!this.get(input);
+        }
+
+        public canPossiblerecipe(input: ItemInstance[]): boolean {
+            return !!this.getPossibleRecipe(input);
         }
 
         public registerRecipeViewer(name: string, icon: number | Tile, content: {

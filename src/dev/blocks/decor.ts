@@ -55,3 +55,15 @@ Translation.addTranslation("Sky stone small brick", {
 Translation.addTranslation("Smooth sky stone block", {
     ru: "Гладкий небесный камень"
 });
+
+BlockRegistry.createBlock("ae_quartz_glass", [
+    {
+        name: "Quartz glass",
+        texture: [["quartz_glass_frame", 0]],
+        inCreative: true
+    }
+]);
+Translation.addTranslation("Quartz glass", {
+    ru: "Кварцевое стекло"
+})
+ConnectedTexture.setModelForGlass(BlockID.ae_quartz_glass, -1, "quartz_glass_frame", "ae_quartz_glass");

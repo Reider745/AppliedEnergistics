@@ -50,3 +50,6 @@ GrindStoneRecipe.add([new ItemStack(ItemID.crystal_seed_fluix, 1, 3)], [new Item
     .add([new ItemStack(VanillaItemID.quartz, 1)], [new ItemStack(ItemID.ae_material_nether_quartz_dust, 1)]);
 
 RecipeCharged.add([new ItemStack(ItemID.ae_quartz, 1)], [new ItemStack(ItemID.ae_charged_quartz, 1)]);
+
+FluixCryatalRecipe.add([new ItemStack(VanillaItemID.quartz, 1), new ItemStack(VanillaItemID.redstone, 1), new ItemStack(ItemID.ae_charged_quartz, 1)], [new ItemStack(ItemID.ae_material_fluix_crystal, 2)]);
+FluixCryatalAI.addItemCheck(ItemID.ae_charged_quartz);

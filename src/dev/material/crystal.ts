@@ -59,7 +59,59 @@ class CrystalItemAI extends EntityAI.AI {
     }
 }
 
+let FluixCryatalRecipe = new MachineRegisty.RecipePool("transform")
+    .registerRecipeViewer("Transform", ItemID.icon_info, {
+        elements: {
+            input0: {type: "slot", x: 100, y: 100, size: 100},
+            input1: {type: "slot", x: 210, y: 100, size: 100},
+            input2: {type: "slot", x: 320, y: 100, size: 100},
+
+            output0: {type: "slot", x: 100, y: 210, size: 100},
+        }
+    });
+
+class FluixCryatalAI extends CrystalItemAI {
+    static item_check: number[] = [];
+
+    public canCreate(): boolean {
+        let item = Entity.getDroppedItem(this.entity);
+        return FluixCryatalAI.item_check.indexOf(item.id) != -1;
+    }
+
+    public tick(): void {
+        let pos = Entity.getPosition(this.entity);
+        if(this.canWater(pos.x, pos.y, pos.z)){
+            let ents = Entity.getAllInRange(pos, 1, Native.EntityType.ITEM);
+            let input: ItemInstance[] = [];
+
+            let dimension = Entity.getDimension(this.entity);
+            for(let ent of ents)
+                if(Entity.getDimension(ent) == dimension)
+                    input.push(Entity.getDroppedItem(ent));
+
+            let recipe = FluixCryatalRecipe.get(input);
+            if(recipe){
+                for(let item of recipe.output)
+                    this.region.spawnDroppedItem(pos.x, pos.y, pos.z, item.id, item.count, item.data, item.extra||null);
+                
+                for(let ent of ents){
+                    let item = Entity.getDroppedItem(ent);
+                    item.count -= 1;
+                    Entity.setDroppedItem(ent, item.id, item.count, item.data, item.extra || null);
+                    if(item.count < 1)
+                        Entity.damageEntity(ent, 999999);
+                }
+            }
+        }
+    }
+
+    static addItemCheck(id: number): void {
+        this.item_check.push(id);
+    }
+}
+
 EntityAI.register("minecraft:item<>", CrystalItemAI);
+EntityAI.register("minecraft:item<>", FluixCryatalAI);
 
 class CrystalItem extends ItemCommon implements ItemBehavior {
     public max: number;
@@ -87,7 +139,7 @@ class CrystalItem extends ItemCommon implements ItemBehavior {
 }
 
 ItemRegistry.registerItem(new CrystalItem("crystal_seed_certus", "Crystal seed certus", "Crystal certus", "crystal_seed_certus", 3));
-ItemRegistry.registerItem(new CrystalItem("crystal_seed_fluix", "Crystal seed fluix", "Crystal fluix", "crystal_seed_fluix", 3));
+ItemRegistry.registerItem(new CrystalItem("crystal_seed_fluix", "Crystal seed fluix", "Fluix crystal", "crystal_seed_fluix", 3));
 ItemRegistry.registerItem(new CrystalItem("crystal_seed_nether", "Crystal seed nether", "Crystal nether", "crystal_seed_nether", 3));
 
 Translation.addTranslation("Crystal seed certus", {
@@ -100,7 +152,7 @@ Translation.addTranslation("Crystal certus", {
 Translation.addTranslation("Crystal seed fluix", {
     ru: "Семена изменчивого кристаллла"
 });
-Translation.addTranslation("Crystal fluix", {
+Translation.addTranslation("Fluix crystal", {
     ru: "Изменчивый кристалл"
 });
 

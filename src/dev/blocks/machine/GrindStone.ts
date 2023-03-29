@@ -1,6 +1,4 @@
-let GrindStoneRecipe = new MachineRegisty.RecipePool("grindstone")
-    .add([new ItemStack(264, 1, 0)], [new ItemStack(263, 9, 0)]);
-
+let GrindStoneRecipe = new MachineRegisty.RecipePool("grindstone");
 let GrindStoneUI = new UI.StandartWindow({
     standard: {
 		header: {

@@ -67,7 +67,7 @@ namespace EntityAI {
             for(let i in list_ai){
                 let _ai = new list_ai[i](entity, LIST.length);
                 if(!_ai.canCreate())
-                    return;
+                    continue;
                 _ai.create();
                 if(_ai.canTick())
                     Updatable.addUpdatable({
