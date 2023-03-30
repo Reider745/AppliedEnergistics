@@ -15,7 +15,8 @@ function createStorage(storages: number[], prefix: string, texture2: string): vo
 			name: "Disk storage "+storage+"k",
 			icon: prefix+storage+"k",
 			stack: 1,
-			category: ItemCategory.ITEMS
+			category: ItemCategory.ITEMS,
+			inCreative: true
 		})
 
 		Translation.addTranslation("Disk storage "+storage+"k", {

@@ -26,6 +26,7 @@ class ControllerTile extends TileEntityBase {
 		tiles = tiles || [];
 		cables = cables || [];
 		blocks = blocks || [];
+
 		for(let i in CHECK_POS){
 			let pos = CHECK_POS[i];
 			pos = {
@@ -63,7 +64,7 @@ class ControllerTile extends TileEntityBase {
 				return {mechanisms: [], cables: []};
 			}
 		}
-		return {mechanisms: tiles, cables: cables};
+		return {mechanisms: tiles, cables};
 	}
 
 	public getStorageEnergy(): number {
@@ -197,7 +198,7 @@ class ControllerTile extends TileEntityBase {
 			}
 			
 			let value = this.cache ? this.getStorageEnergy()-this.energy : -1;
-			
+
 			if(!this.cache || value < 0)
 				this.blockSource.setBlock(this.x, this.y, this.z, this.blockID, 0);
 			else{
@@ -229,7 +230,7 @@ class ControllerTile extends TileEntityBase {
 }
 
 class AppliedTile extends TileEntityBase {
-	constructor(id){
+	constructor(id: number){
 		super();
 		this.register(id);
 		addConnect(id);

@@ -15,7 +15,6 @@ namespace AppliedEnergistics {
 		let extra = new ItemExtraData();
 		extra.putInt("value", 0);
 		extra.putInt("max", max);
-		this.setItems(extra, [{id: 1, count: 1}, {id: 5, count: 5}]);
 		Item.addToCreative(id, 1, 0, extra);
 		drives[id] = max;
 	}

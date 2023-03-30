@@ -21,7 +21,7 @@ const Ae = EnergyTypeRegistry.assureEnergyType("Ae", 1);
 const SIZE = 2/16;
 let CacheFacede = new RenderUtil.ModelsCache("facede");
 
-const COLORS = ["black", "blue", "brown", "cyan", "gray", "green", "lime", "magenta", "orange", "pink", "purple", "red", "transparent", "white", "yellow"];
+const COLORS = ["transparent", "black", "blue", "brown", "cyan", "gray", "green", "lime", "magenta", "orange", "pink", "purple", "red", "white", "yellow"];
 
 function splitImage(path, size, name){
 	let input = FileTools.ReadImage(path);
@@ -35,7 +35,7 @@ function pushToArray(arr1, arr2){
 		arr1.push(arr2[i]);
 }
 
-ItemModel.setCurrentCacheGroup("AppliedEnergistics", "pre-alpha 0.1(preview 3.0)");
+ItemModel.setCurrentCacheGroup("AppliedEnergistics", "pre-alpha 0.1");
 
 function addConnect(id, data: number = -1, group: string = "ae"){
 	ICRender.getGroup(group).add(id, data);

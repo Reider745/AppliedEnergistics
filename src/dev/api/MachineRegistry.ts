@@ -32,23 +32,17 @@ namespace MachineRegisty {
             return this.id;
         }
 
-        public add(input_: (ItemInstance | number)[], output_: (ItemInstance | number)[], info?: any): RecipePool {
-            let input: ItemInstance[] = [];
-            let output: ItemInstance[] = [];
+        private getArrayItemInstance(input: (ItemInstance | number)[]): ItemInstance[]{
+            let result: ItemInstance[] = [];
+            input.forEach((item) => {
+                if(typeof item == "number") result.push(new ItemStack(item, item == 0 ? 0 : 1));
+                else result.push(item);
+            });
+            return result;
+        }
 
-            for(let v of input_)
-                if(typeof v == "number")
-                    input.push(new ItemStack(v, 1));
-                else
-                    input.push(v);
-
-            for(let v of output_)
-                if(typeof v == "number")
-                    output.push(new ItemStack(v, 1));
-                else
-                    output.push(v);
-
-            this.recipes.push({input, output, info});
+        public add(input: (ItemInstance | number)[], output: (ItemInstance | number)[], info?: any): RecipePool {
+            this.recipes.push({input: this.getArrayItemInstance(input), output: this.getArrayItemInstance(output), info});
             return this;
         }
 

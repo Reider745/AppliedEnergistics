@@ -18,20 +18,20 @@ const DATA_CABLE_DEFAULT = COLORS.indexOf("transparent");
 	Ae.registerWire(BlockID.ae_network_cable, 9e99);
 
 	for(let i in cables){
+		setWireModel("ae", BlockID.ae_network_cable, Number(i));
 		if(Number(i) == DATA_CABLE_DEFAULT){
 			Recipes.addShaped({id: BlockID.ae_network_cable, count: 1, data:DATA_CABLE_DEFAULT}, [
 				"ab"
 			], ["a", BlockID.ae_network_cable, -1, "b", VanillaItemID.water_bucket, 0], function(api, field, result, player){
 				for(let i = 0; i < field.length; i++){
 					if (field[i].id == VanillaItemID.water_bucket)
-						api.getFieldSlot(i).set(VanillaItemID.bucket, 1, 0);
+						api.getFieldSlot(i).set(VanillaItemID.bucket, 1, 0, null);
 					else
 						api.decreaseFieldSlot(i);
 				}
 			});
 			continue;
 		}
-		setWireModel("ae", BlockID.ae_network_cable, Number(i));
 		Recipes.addShaped({id: BlockID.ae_network_cable, count: 8, data: Number(i)}, [
 			"aaa",
 			"aba",

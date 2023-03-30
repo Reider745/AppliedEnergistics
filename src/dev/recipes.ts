@@ -35,6 +35,23 @@ void function(){
 }();
 
 void function(){
+    let arr = [[ItemID.crystal_seed_certus, 3], [ItemID.ae_quartz, 0], [ItemID.ae_charged_quartz, 0]];
+    for(let item of arr){
+        Recipes.addShaped({id: BlockID.ae_energy_cell, count: 1, data: 0}, [
+            "cdc",
+            "dgd",
+            "cdc"
+        ], ["c", item[0], item[1], "g", BlockID.ae_quartz_glass, 0, "d", ItemID.ae_material_fluix_dust, 0]);
+    }
+}();
+
+Recipes.addShaped({id: BlockID.ae_dense_energy_cell, count: 1, data: 0}, [
+    "sss",
+    "sps",
+    "sss"
+], ["s", BlockID.ae_energy_cell, 0, "p", ItemID.ae_material_calculation_processor, 0]);
+
+void function(){
     let arr = [[VanillaItemID.quartz, 0], [ItemID.crystal_seed_nether, 3]];
     for(let id of arr){
         Recipes.addShaped({id: ItemID.ae_annihilation_core, count: 2, data: 0}, [
