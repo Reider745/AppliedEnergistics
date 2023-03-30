@@ -6,8 +6,9 @@ ItemGeneration.addItem("ae_meteorit", ItemID.ae_silicon_press, .5, {min: 1, max:
 ItemGeneration.registerRecipeViewer("ae_meteorit", "Meteorit");
 
 StructurePiece.register(StructurePiece.getDefault({
-    chance: 800,
+    chance: 400,
     name: "meteorit",
+    distance: 200,
     checkName: true,
     structure: new Structure.advanced().setProt({
         after(x, y, z, region, packet) {
