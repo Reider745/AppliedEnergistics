@@ -27,7 +27,15 @@ namespace EntityAI {
             return true;
         }
 
-        public tick(): void {
+        public canLocalTick(): boolean {
+            return false;
+        }
+
+        public onTick(): void {
+
+        }
+
+        public onLocalTick(): void {
 
         }
 
@@ -41,10 +49,6 @@ namespace EntityAI {
 
         public removeAi(): void {
 
-        }
-
-        public update(): void {
-            this.tick();
         }
 
         public destroy(): void {
@@ -72,7 +76,14 @@ namespace EntityAI {
                 if(_ai.canTick())
                     Updatable.addUpdatable({
                         update() {
-                            _ai.update();
+                            _ai.onTick();
+                            this.remove = _ai.remove;   
+                        }
+                    });
+                if(_ai.canLocalTick())
+                    Updatable.addLocalUpdatable({
+                        update() {
+                            _ai.onLocalTick();
                             this.remove = _ai.remove;   
                         }
                     });

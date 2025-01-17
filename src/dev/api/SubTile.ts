@@ -1,3 +1,11 @@
+class StorageSavedData {
+
+    publ
+
+    public covertToInnerSave(): any {
+
+    }
+}
 class SubTile {
     public tile: TileEntity.TileEntityPrototype;
     public side: number;

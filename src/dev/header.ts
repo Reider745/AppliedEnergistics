@@ -7,6 +7,7 @@ IMPORT("ParticlesCore");
 IMPORT("ConnectedTexture");
 
 const EMPTY_ITEM:ItemInstance = {id: 0, count: 0, data: 0};
+const AE_LOG = "AppliedEnergistics";
 
 interface IItem {
 	setShouldDespawn(id: number, value: boolean): void;

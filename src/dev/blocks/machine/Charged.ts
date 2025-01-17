@@ -41,7 +41,7 @@ class ChargedTile extends Machine {
 
     @BlockEngine.Decorators.ClientSide
     public updateModelClient(): void {
-        this.animation = this.animation || new Animation.Item(this.x+.5, this.y+.5, this.z+.5);
+        this.animation = new Animation.Item(this.x+.5, this.y+.5, this.z+.5);
         this.animation.describeItem({
             id: Network.serverToLocalId(this.networkData.getInt("id", 0)),
             data: this.networkData.getInt("data", 0),

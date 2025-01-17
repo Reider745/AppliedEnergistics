@@ -27,10 +27,12 @@ Callback.addCallback("PostLoaded", function(){
 })
 
 let faceds = [];
-function createFacede(textId, id, data){
-	const facade = "ae_facade_"+textId +(data === 0 ? "" : data);
+function createFacede(str_id: string, name: string, id: number, data: number): void {
+	Logger.Log("Added facede "+ id + " "+data, AE_LOG);
+
+	const facade = "ae_facade_"+str_id;
 	IDRegistry.genItemID(facade); 
-	Item.createItem(facade, "Storage facade "+textId, {name: "", meta: 0}, {stack: 64, isTech: false});
+	Item.createItem(facade, "Storage facade "+name, {name: "", meta: 0}, {stack: 64, isTech: false});
 
 	const numId = ItemID[facade];
 
@@ -57,8 +59,50 @@ function createFacede(textId, id, data){
 	], ["a", id, 0, "b", ItemID.ae_facade_cable_anchor, 0]);
 	Item.addCreativeGroup("facade", "Facade", [ItemID[facade]]);
 }
+
+function equalsRenderMesh(mesh1: RenderMesh, mesh2: RenderMesh): boolean {
+	let vertices1 = mesh1.getReadOnlyVertexData().vertices;
+	let vertices2 = mesh2.getReadOnlyVertexData().vertices;
+
+	if(vertices2.length == 0 || vertices1.length != vertices2.length) 
+		return false;
+
+	for(let i = 0;i < vertices1.length;i++)
+		if(vertices1[i] != vertices2[i])
+			return false;
+
+	return true;
+}
+
 let JsonFacade: {id: string, textId?: string, datas?: number[]}[] = FileTools.ReadJSON(__dir__+"facede.json");
-Callback.addCallback("ModsLoaded", function(){
+
+let isAddedFacede = false;
+Callback.addCallback("LevelDisplayed", () => {
+	if(isAddedFacede) return;
+	isAddedFacede = true;
+
+	let mesh = ItemModel.getItemRenderMeshFor(1, 1, 0, false);
+	let models: ItemModel[] = (() => {
+		let result = [];
+		let models = ItemModel.getAllModels();
+		let it = models.iterator();
+		while(it.hasNext())
+			result.push(it.next());
+		return result;
+	})();
+
+	for(let model of models){
+		let id = model.id, data = model.data;
+
+		if(!TileEntity.isTileEntityBlock(id) && id != 0 && equalsRenderMesh(mesh, ItemModel.getItemRenderMeshFor(id, 1, data, false)))
+			createFacede(
+				id+":"+data,
+				Translation.translate(Item.getName(id, data)), 
+				id, data
+			);
+	}
+});
+/*Callback.addCallback("ModsLoaded", function(){
 	for(let i in JsonFacade){
 		let obj = JsonFacade[i];
 		let split = obj.id.split(".");
@@ -70,4 +114,4 @@ Callback.addCallback("ModsLoaded", function(){
 		else
 			createFacede(textId, eval(obj.id), 0);
 	}
-});
+});*/

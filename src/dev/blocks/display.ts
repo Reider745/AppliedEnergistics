@@ -23,6 +23,7 @@ function setModelDisplay(id: number, texture1: [string, number] = ["ae_sides", 0
 			else textures.push(texture1);
 		TerminalModel(id, textures, i, group);
 	}
+	
 	new RenderUtil.Model()
 		.add(p, p, 1-p, 1-p, 1-p, 1+LAYER, [texture1, texture1, texture1, texture2, texture1, texture1])
 		.setItemModel(id);

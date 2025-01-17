@@ -142,7 +142,7 @@ let ParticlesCore = {
 		let group = new ParticlesCore.Group();
 		for(let i = 0;i<=count;i++)
 			group.add(type, x1 + (x2-x1) * (i / count), y1 + (y2-y1) * (i / count), z1 + (z2-z1) * (i / count));
-    group.send(region);
+    	group.send(region);
 	},
 	GroupLine(){
 		let particles = [];

@@ -78,7 +78,7 @@ class FluixCryatalAI extends CrystalItemAI {
         return FluixCryatalAI.item_check.indexOf(item.id) != -1;
     }
 
-    public tick(): void {
+    public onTick(): void {
         let pos = Entity.getPosition(this.entity);
         if(this.canWater(pos.x, pos.y, pos.z)){
             let ents = Entity.getAllInRange(pos, 1, Native.EntityType.ITEM);
